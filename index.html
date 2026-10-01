@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<title>ofxsplit: split a bank OFX file that holds several accounts into one file per account</title>
+<meta name="description" content="Choose an OFX or QFX file exported with several accounts in it, and download one file per account, ready for Actual Budget's import dialog. Nothing is uploaded.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Split a bank OFX file that holds several accounts into one file per account</h1>
+<p>Some banks and money apps export all your accounts into a single OFX or QFX file. Actual Budget imports such a file into the one account you import from: every transaction lands there, and when the file mixes a bank account and a card, only the card is read. This page lists the accounts inside the file and gives you one file per account, so each one can be imported into its own account in Actual.</p>
+<ol class="small">
+<li>Choose the file (or several) below. It is read in your browser and nothing in this page's code sends it anywhere; the page's security policy also stops its scripts from making network requests.</li>
+<li>Download the file for each account.</li>
+<li>In Actual, open each account and import its file as usual.</li>
+</ol>
+<p><label>OFX or QFX file(s) <input type="file" id="files" multiple accept=".ofx,.qfx,.OFX,.QFX"></label></p>
+<p id="status" role="status"></p>
+<div id="list"></div>
+<p><button type="button" id="clear">Clear the page</button></p>
+<p class="small">Each output file keeps the original header, the sign-on block and that account's statements exactly as they were in your file; only the wrapper around them is rebuilt. File names carry the account type and the last four characters of the account number. No warranty: check the transactions after importing.</p>
+<div class="price">
+<p><strong>Possible later tool: the same for CSV files with several accounts (3 USD, one time, not built).</strong></p>
+<p>You would pick the column that names the account and get one CSV per account. Nothing is charged now and no date is promised. If you want it, say so in a public comment on the issue below; there is no payment of any kind before I answer there.</p>
+<p><a href="https://github.com/Rezarys/ofxsplit/issues/1">Tell me you want it (free GitHub account needed)</a></p>
+</div>
+<p class="small">Reads OFX 1 (SGML) and OFX 2 (XML) files, and QFX. Bank, credit card and investment statements are each split by account number. It has been tested with automated tests on example files and with Actual's own import code, but not in a real browser and not on a real bank export. If it does not work for you, an issue on the repo helps; please do not attach your real file, only the bank or app it comes from and the error shown. Not affiliated with the Actual Budget project; the name is used here only to say which app reads these files. Built with AI assistance, tested with automated tests, not reviewed line by line. No cookies, no browser storage, no analytics, no third-party code. MIT licensed, source on <a href="https://github.com/Rezarys/ofxsplit">GitHub</a>. Younes Z.</p>
+<script src="split.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
